@@ -1,18 +1,16 @@
 <template>
   <v-app>
+    
+    <Navigation />
+
     <v-main>
       <router-view/>
     </v-main>
   </v-app>
 </template>
 
-<script>
+<script setup>
 
-export default {
-  name: 'App',
+import Navigation from '@/components/Navigation.vue'
 
-  data: () => ({
-    //
-  }),
-}
 </script>
