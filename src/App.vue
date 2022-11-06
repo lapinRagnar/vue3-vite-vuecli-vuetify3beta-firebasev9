@@ -36,10 +36,14 @@
             <v-list-item prepend-icon="mdi-account-group-outline" title="Users" value="users"></v-list-item>
           </v-list>
         </v-navigation-drawer>
-        <v-main style="height: 300px;">
+        
+        <v-main style="height: 95vh;">
           <router-view/>
         </v-main>
+
+
       </v-layout>
+      <Footer />
     </v-card>
 
 
@@ -48,9 +52,11 @@
 
 <script setup>
 
-import { ref, onMounted, computed  } from 'vue'
+import { ref,  } from 'vue'
 
 import Navigation from '@/components/Navigation.vue'
+import Footer from '@/components/Footer.vue'
+
 
 const drawer = ref(true)
 const rail = ref(true)
