@@ -36,6 +36,12 @@
         <v-icon x-large right>mdi-email</v-icon>
       </v-btn>
     </div>
+
+    <div class="mb-5">
+      <v-btn icon depressed small dark color="purple">
+        <v-icon>mdi- mdi-heart-outline</v-icon>
+      </v-btn>
+    </div>
   
   </div>
 </template>
