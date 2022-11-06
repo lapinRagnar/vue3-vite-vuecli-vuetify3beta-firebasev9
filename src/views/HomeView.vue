@@ -1,18 +1,17 @@
 <template>
   <div>
-    Home
+    <h1> home</h1>
     
-    <p class="purple red--text text-center">Lorem ipsum</p>
-
-    <div class="purple darken-2 text-center">
-      <span class="white--text">Lorem ipsum</span>
+    <div class="bg-purple-darken-2 text-center">
+      <span>Lorem ipsum</span>
     </div>
-    
 
-    <v-btn outlined flat color="primary">
-      <v-icon dense color="error">mdi-email</v-icon>
-      <span class="white--text"> Click </span>
-    </v-btn>
+    <h1 class="text-h1">Massive text</h1>
+
+    <p class="text-right">
+      Left aligned on all viewport sizes.
+    </p>
+  
   </div>
 </template>
 
