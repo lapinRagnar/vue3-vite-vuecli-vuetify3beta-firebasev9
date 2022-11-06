@@ -1,35 +1,23 @@
 <template>
-  <div>
-    
-    <v-app-bar
-      color="deep-purple accent-4"
-      dense
-      dark
-    >
+  <nav>
+    <v-toolbar flat app>
 
-      <v-toolbar-title>{{ titre }} - Tuto Vuetify</v-toolbar-title>
+      <v-toolbar-title class="text-uppercase"> <span class="text-green">{{ titre }}</span> | Tuto vue</v-toolbar-title>
 
-      <v-spacer></v-spacer>
-
-      <v-btn icon>
+      <v-btn to="/">
         <v-icon>mdi-home</v-icon>
       </v-btn>
 
-      <v-btn icon>
+      <v-btn to="/about">
         <v-icon>mdi-information-variant</v-icon>
       </v-btn>
 
-      <v-btn icon>
-        <v-icon>mdi-account-lock</v-icon>
+      <v-btn color="grey">
+        <v-icon right>mdi-location-exit</v-icon>
       </v-btn>
-
-      <v-btn icon>
-        <v-icon>mdi-account-off</v-icon>
-      </v-btn>
-
-    </v-app-bar>
-
-  </div>
+      
+    </v-toolbar>
+  </nav>
 </template>
 
 <script setup>
