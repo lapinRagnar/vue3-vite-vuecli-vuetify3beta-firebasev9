@@ -2,7 +2,13 @@
   <div>
     <h1> home</h1>
     
-    <v-btn width="50%" depressed  dark color="pink">click moi</v-btn>
+    <div class="mb-5">
+      <v-btn width="50%" depressed  dark color="pink">click moi</v-btn>
+    </div>
+
+    <div >
+      <v-btn width="50%" flat color="bg-red" >click moi</v-btn>
+    </div>
   
   </div>
 </template>
