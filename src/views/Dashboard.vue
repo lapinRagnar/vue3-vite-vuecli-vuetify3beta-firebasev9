@@ -1,5 +1,7 @@
 <template>
+  
   <div>
+
     <h1 class="text-h3 text-brown-darken-2 text-center"> Dashboard</h1>
 
     <v-container fluid  class="my-5">
@@ -28,17 +30,28 @@
           </v-col>
 
           <v-col cols="2" sm="4" md="2">
-            <div class="caption text-grey">Status</div>
-            <div>{{ project.status }}</div>
+            <div>
+              <v-chip 
+                class="ma-2"
+                color="cyan"
+                text-color="white"
+                size="small"
+              >
+                {{ project.status }}
+              </v-chip>
+            </div>
           </v-col>
 
         </v-row>
+
+        <divider></divider>
       
       </v-card>
 
     </v-container>
   
   </div>
+
 </template>
 
 <script setup>
