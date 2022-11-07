@@ -4,8 +4,16 @@
 
       <v-toolbar-title class="text-uppercase"> <span class="text-green">{{ titre }}</span> | Tuto vuetify</v-toolbar-title>
 
-      <v-btn to="/">
+      <v-btn :to="{name: 'dashboard'}">
         <v-icon>mdi-home</v-icon>
+      </v-btn>
+
+      <v-btn :to="{name: 'project'}">
+        <v-icon>mdi-calendar-range</v-icon>
+      </v-btn>
+
+      <v-btn :to="{name: 'team'}">
+        <v-icon>mdi-microsoft-teams</v-icon>
       </v-btn>
 
       <v-btn to="/about">

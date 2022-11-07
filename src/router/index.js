@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '@/views/HomeView.vue'
+import Dashboard from '@/views/Dashboard.vue'
 import Team from '@/views/Team.vue'
 import Project from '@/views/Project.vue'
 
@@ -8,10 +8,10 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: HomeView,
+      name: 'dashboard',
+      component: Dashboard,
       meta: {
-        title: 'Home'
+        title: 'Dashboard'
       }
     },
     {

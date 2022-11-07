@@ -30,7 +30,7 @@
           <v-divider></v-divider>
 
           <v-list density="compact" nav>
-            <v-list-item :to="{name: 'home'}" prepend-icon="mdi-home-city" title="Home" value="home"></v-list-item>
+            <v-list-item :to="{name: 'dashboard'}" prepend-icon="mdi-home-city" title="Dashboard" value="dashboard"></v-list-item>
             <v-list-item :to="{name: 'project'}" prepend-icon="mdi-calendar-range" title="Project" value="project"></v-list-item>
             <v-list-item :to="{name: 'team'}" prepend-icon="mdi-microsoft-teams" title="Team" value="team"></v-list-item>
             <v-list-item :to="{name: 'about'}" prepend-icon="mdi-information-variant" title="About" value="about"></v-list-item>
