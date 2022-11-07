@@ -65,3 +65,9 @@ const rail = ref(true)
 
 
 </script>
+
+<style lang="scss">
+.v-list-item--active {
+    background-color: rgb(145, 220, 129) !important;;
+  }
+</style>

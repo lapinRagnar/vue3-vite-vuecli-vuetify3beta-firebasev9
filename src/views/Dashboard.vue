@@ -10,7 +10,7 @@
         :key="project.title"
       >
       
-        <v-row>
+        <v-row :class="` project ${project.status} `">
           
           <v-col cols="12" md="6">
             <div class="caption text-grey">Project Title</div>
@@ -54,3 +54,16 @@ const projects = ref([
 
 
 </script>
+
+<style lang="scss">
+
+  .project.complete {
+    border-left: 4px solid #3cd1c2;
+  }
+  .project.ongoing {
+    border-left: 4px solid orange;
+  }
+  .project.overdue {
+    border-left: 4px solid tomato;
+  }
+</style>
