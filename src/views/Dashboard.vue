@@ -33,9 +33,8 @@
             <div>
               <v-chip 
                 class="ma-2"
-                color="cyan"
-                text-color="white"
                 size="small"
+                :class="`${project.status} text-white caption my-2`"
               >
                 {{ project.status }}
               </v-chip>
@@ -79,4 +78,16 @@ const projects = ref([
   .project.overdue {
     border-left: 4px solid tomato;
   }
+
+  /* ------------- v-chip ------------------- */
+  .v-chip.complete{
+    background: #3cd1c2;
+  }
+  .v-chip.ongoing{
+    background: #ffaa2c;
+  }
+  .v-chip.overdue{
+    background: #f83e70;
+  }
+
 </style>
