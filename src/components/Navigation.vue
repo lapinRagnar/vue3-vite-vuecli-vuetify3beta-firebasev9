@@ -2,7 +2,7 @@
   <nav>
     <v-toolbar flat app>
 
-      <v-toolbar-title class="text-uppercase"> <span class="text-green">{{ titre }}</span> | Tuto vue</v-toolbar-title>
+      <v-toolbar-title class="text-uppercase"> <span class="text-green">{{ titre }}</span> | Tuto vuetify</v-toolbar-title>
 
       <v-btn to="/">
         <v-icon>mdi-home</v-icon>
