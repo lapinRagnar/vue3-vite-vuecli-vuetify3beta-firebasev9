@@ -12,6 +12,11 @@
           <v-btn size="small" flat @click="sortBy('title')">
             <v-icon>mdi-folder</v-icon>
             <span class="caption text-lowercase">  by project name</span>
+            <v-tooltip
+              activator="parent"
+              location="top"
+              close-delay="1000"
+            >sort project by title</v-tooltip>
           </v-btn>          
         </v-col>
         
@@ -19,6 +24,11 @@
           <v-btn size="small" flat @click="sortBy('person')">
             <v-icon>mdi-account</v-icon>
             <span class="caption text-lowercase">  by person</span>
+            <v-tooltip
+              activator="parent"
+              location="top"
+              close-delay="1000"
+            >sort project by person name</v-tooltip>
           </v-btn>          
         </v-col>
       
@@ -61,9 +71,9 @@
 
         </v-row>
 
-        <divider></divider>
       
       </v-card>
+      
 
     </v-container>
   
