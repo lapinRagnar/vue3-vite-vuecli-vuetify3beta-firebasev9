@@ -30,7 +30,7 @@
           </v-col>
 
           <v-col cols="2" sm="4" md="2">
-            <div>
+            <div class="d-flex justify-end">
               <v-chip 
                 class="ma-2"
                 size="small"
