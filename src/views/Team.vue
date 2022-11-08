@@ -1,11 +1,73 @@
 <template>
-  <div>
+  <div class="minimun">
     <h1 class="text-h3 text-brown-darken-2 text-center">Team</h1>
 
-    <v-container grid-list-xs class="my-5">
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores expedita facilis commodi atque totam, debitis nobis! Doloremque, ducimus totam fugiat soluta omnis maxime cumque unde exercitationem error tempore animi sunt?</p>
-      <p class="my-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae obcaecati atque nemo similique molestias porro neque dolorem quibusdam iure inventore ratione adipisci facere, mollitia repudiandae veniam illum. Possimus, illum quibusdam!</p>
+    <v-container class="my-5 ">
+      
+      <v-row>
+      
+        <v-col
+          cols="12"
+          sm="6"
+          md="4"
+          lg="3"
+          v-for="person in team"
+          :key="person.name"
+        >
+
+          <v-card
+            flat
+            class="text-center ma-3"
+          >
+            
+            <v-responsive class="border pa-4">
+              <v-img
+                src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+                height="200px"
+                cover
+              ></v-img>
+            </v-responsive>
+
+            <v-card-text>
+              <div class="subheading">{{ person.name }}</div>
+              <div class="text-grey">{{ person.role}}</div>
+            </v-card-text>
+
+            <v-card-actions>
+              <v-btn flat color="grey">
+                <v-icon size="small" class="mr-5" >mdi-message</v-icon>
+                <span>Message</span>
+              </v-btn>
+            </v-card-actions>
+
+          </v-card>
+        
+        </v-col>
+      
+      </v-row>
+
     </v-container>
 
   </div>
 </template>
+
+<script setup>
+
+import { ref } from 'vue'
+
+const team = ref([
+  { name: 'The Net Ninja', role: 'Web developer' },
+  { name: 'Ryu', role: 'Graphic designer' },
+  { name: 'Chun Li', role: 'Web developer' },
+  { name: 'Gouken', role: 'Social media maverick' },
+  { name: 'Yoshi', role: 'Sales guru'}
+])
+
+
+</script>
+
+<style lang="scss" scoped>
+  .minimun{
+    min-width: 250px;
+  }
+</style>
