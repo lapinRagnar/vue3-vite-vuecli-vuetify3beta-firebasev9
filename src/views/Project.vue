@@ -14,12 +14,15 @@
 
             <v-expansion-panel-text>
 
-              <v-card class="pa-4 ma-4">
-                <v-card-text>
-                  <div class="font-weight-bold">{{ project.due }}...</div>
-                  <div class="">info</div>
-                </v-card-text>
-              </v-card>
+              
+              <v-card-text>
+                <div class="font-weight-bold">creat by - {{ project.person}}</div>
+                <div >{{ project.due }}...</div>
+                <div class="">info</div>
+                <div>status - {{ project.status }}</div>
+                <div> content - {{ project.content }}</div>
+              </v-card-text>
+              
 
             </v-expansion-panel-text>
           
