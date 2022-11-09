@@ -39,7 +39,7 @@
           </v-list>
         </v-navigation-drawer>
         
-        <v-main style="height: 95vh;" class="mx-4 mb-4">
+        <v-main style="min-height: 100vh;" class="mx-4 mb-4">
           <router-view/>
         </v-main>
 

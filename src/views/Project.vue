@@ -2,11 +2,55 @@
   <div>
     <h1 class="text-h3 text-brown-darken-2 text-center">Project</h1>
 
-    <v-container grid-list-xs class="my-5">
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores expedita facilis commodi atque totam, debitis nobis! Doloremque, ducimus totam fugiat soluta omnis maxime cumque unde exercitationem error tempore animi sunt?</p>
-      <p class="my-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae obcaecati atque nemo similique molestias porro neque dolorem quibusdam iure inventore ratione adipisci facere, mollitia repudiandae veniam illum. Possimus, illum quibusdam!</p>
-    </v-container>
+    <v-container class="my-5">
+      
+      <div class="text-subtitle-2 mb-2">Project title</div>
+      <v-expansion-panels>
+        <v-expansion-panel
+          :title="project.title"
+          v-for="project in myProjects" 
+          :key="project.title"          
+        >
 
-    
+            <v-expansion-panel-text>
+
+              <v-card class="pa-4 ma-4">
+                <v-card-text>
+                  <div class="font-weight-bold">{{ project.due }}...</div>
+                  <div class="">info</div>
+                </v-card-text>
+              </v-card>
+
+            </v-expansion-panel-text>
+          
+
+        </v-expansion-panel>
+      </v-expansion-panels>
+
+    </v-container>
   </div>
 </template>
+
+<script setup>
+
+  import { ref, reactive, computed } from 'vue'
+
+
+  const donnees = reactive({
+    salut: 'John Doe',
+    projects: [
+      { title: 'Design a new website', person: 'The Net Ninja', due: '1st Jan 2019', status: 'ongoing', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!'},
+      { title: 'learn vuetify', person: 'The Net Ninja', due: '1st mars 2022', status: 'complete', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!'},
+      { title: 'learn all things', person: 'The Net Ninja', due: '1st Jan 2022', status: 'ongoing', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!'},
+      { title: 'Code up the homepage', person: 'Chun Li', due: '10th Jan 2019', status: 'complete', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!'},
+      { title: 'Design video thumbnails', person: 'Ryu', due: '20th Dec 2018', status: 'complete', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!'},
+      { title: 'Create a community forum', person: 'Gouken', due: '20th Oct 2018', status: 'overdue', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!'},
+    ]
+  })
+
+
+  const myProjects = computed(() => {
+    return donnees.projects.filter(project => project.person === 'The Net Ninja' )
+  })
+
+</script>
