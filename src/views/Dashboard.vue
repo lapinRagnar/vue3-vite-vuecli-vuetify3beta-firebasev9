@@ -108,9 +108,13 @@
 
 <script setup>
 
-  import { ref } from 'vue'
+  import { ref, onMounted } from 'vue'
 
   import Popup from '@/components/Popup.vue'
+
+  import { db } from '@/firebase/config.js'
+
+  import { doc, onSnapshot, query, collection , getDoc } from "firebase/firestore";
 
   const projects = ref([
     { title: 'Design a new website', person: 'The Net Ninja', due: '1st Jan 2019', status: 'ongoing', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!'},
@@ -127,6 +131,32 @@
 
   const snackbar = ref(true)
   const text = ref('Tu viens d\'ajouter un nouveau projet')
+
+  onMounted( async () => {
+    console.log('la db', db)
+    
+
+    // const q = query(collection(db, "projects"))
+    // console.log('query------', q)
+    // const unsubscribe = onSnapshot(q, (querySnapshot) => {
+    //   const projects = [];
+    //   querySnapshot.forEach((doc) => {
+    //       projects.push(doc.data());
+    //   });
+    //   console.log("Current cities in CA: ", projects.join(", "));
+    // })
+
+    const docRef = doc(db, "cities", "SF");
+    const docSnap = await getDoc(docRef)
+
+    if (docSnap.exists()) {
+      console.log("Document data:", docSnap.data())
+    } else {
+      // doc.data() will be undefined in this case
+      console.log("No such document!")
+    }
+
+  })
 
 </script>
 
