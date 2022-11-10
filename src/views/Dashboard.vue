@@ -6,7 +6,9 @@
 
     <v-container fluid  class="my-5">
 
-      <v-row class="mb-3">
+      <Popup />
+
+      <v-row class="mb-3 mt-10">
         
         <v-col lg="2" md="2" sm="2">
           <v-btn size="small" flat @click="sortBy('title')">
@@ -84,6 +86,8 @@
 <script setup>
 
   import { ref } from 'vue'
+
+  import Popup from '@/components/Popup.vue'
 
   const projects = ref([
     { title: 'Design a new website', person: 'The Net Ninja', due: '1st Jan 2019', status: 'ongoing', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!'},

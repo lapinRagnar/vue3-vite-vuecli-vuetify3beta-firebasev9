@@ -6,10 +6,11 @@
     <!-- layout -->
     <v-card>
       <v-layout>
+
         <v-navigation-drawer
           v-model="drawer"
           :rail="rail"
-          width="180"
+          width="220"
           permanent
           @click="rail = false"
         >
@@ -28,6 +29,7 @@
           </v-list-item>
 
           <v-divider></v-divider>
+
 
           <v-list density="compact" nav>
             <v-list-item :to="{name: 'dashboard'}" prepend-icon="mdi-home-city" title="Dashboard" value="dashboard"></v-list-item>
@@ -58,6 +60,7 @@ import { ref,  } from 'vue'
 
 import Navigation from '@/components/Navigation.vue'
 import Footer from '@/components/Footer.vue'
+
 
 
 const drawer = ref(true)
