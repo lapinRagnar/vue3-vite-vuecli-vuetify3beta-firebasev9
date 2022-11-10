@@ -31,6 +31,14 @@
               prepend-icon="mdi-pencil-outline"
             />
 
+            <v-text-field
+              label="Due date"
+              v-model="state.due"
+              prepend-icon="mdi-calendar-range "
+            />        
+
+
+
             <v-btn
               color="success"
               class="mr-4"
@@ -54,12 +62,15 @@
 <script setup>
 
   import { ref, reactive } from 'vue'
+  import Datepickers from '@/components/Datepickers.vue'
 
   const dialog = ref(false)
 
   const state = reactive({ 
     title: '',
     content: '',
+    due: null,
+    showDatePicker: false,
 
   })
 
