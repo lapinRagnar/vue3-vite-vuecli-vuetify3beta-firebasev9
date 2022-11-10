@@ -16,9 +16,9 @@ coverage
 
 # variable d'environment
 .env
-firebase
+src/firebase/
 config.js
-firebase/config.js
+src/firebase/config.js
 
 /cypress/videos/
 /cypress/screenshots/
