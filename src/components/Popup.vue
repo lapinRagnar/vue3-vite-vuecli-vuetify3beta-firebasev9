@@ -17,7 +17,30 @@
         <v-card-title>Add a new project</v-card-title>
 
         <v-card-text>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          
+          <v-form class="px-3">
+            <v-text-field
+              label="Title"
+              v-model="state.title"
+              prepend-icon="mdi-format-title"
+            />            
+            
+            <v-textarea 
+              label="Information"
+              v-model="state.content"
+              prepend-icon="mdi-pencil-outline"
+            />
+
+            <v-btn
+              color="success"
+              class="mr-4"
+              @click="submit"
+            >
+              Add Project
+            </v-btn>
+
+          </v-form>
+        
         </v-card-text>
         <v-card-actions>
           <v-btn color="primary" block @click="dialog = false">Close Dialog</v-btn>
@@ -30,8 +53,18 @@
 
 <script setup>
 
-  import { ref } from 'vue'
+  import { ref, reactive } from 'vue'
 
   const dialog = ref(false)
+
+  const state = reactive({ 
+    title: '',
+    content: '',
+
+  })
+
+  const submit = () => {
+    console.log(state.title, state.content)
+  }
 
 </script>
