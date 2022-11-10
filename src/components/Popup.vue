@@ -18,24 +18,28 @@
 
         <v-card-text>
           
-          <v-form class="px-3">
+          <v-form class="px-3" ref="form">
             <v-text-field
               label="Title"
               v-model="state.title"
               prepend-icon="mdi-format-title"
+              :rules="state.titleRules"
             />            
             
             <v-textarea 
               label="Information"
               v-model="state.content"
               prepend-icon="mdi-pencil-outline"
+              :rules="state.informationRules"
             />
 
             <v-text-field
               label="Due date"
               v-model="state.due"
               prepend-icon="mdi-calendar-range "
-            />        
+            />
+
+     
 
 
 
@@ -43,6 +47,7 @@
               color="success"
               class="mr-4"
               @click="submit"
+              :loading="loading"
             >
               Add Project
             </v-btn>
@@ -61,10 +66,14 @@
 
 <script setup>
 
-  import { ref, reactive } from 'vue'
-  import Datepickers from '@/components/Datepickers.vue'
+  import { ref, reactive, onMounted } from 'vue'
+  import db from '@/firebase/config.js'
+  import { collection, addDoc, setDoc, doc } from "firebase/firestore"; 
 
   const dialog = ref(false)
+
+  const form = ref(null)
+  const loading = ref(false)
 
   const state = reactive({ 
     title: '',
@@ -72,10 +81,51 @@
     due: null,
     showDatePicker: false,
 
+    titleRules: [
+      v => !!v || 'Name is required',
+      v => (v && v.length >= 3) || 'Title must be greater than 3 characters',
+    ],
+
+    informationRules: [
+      v => !!v || 'Name is required',
+      v => (v && v.length >= 10) || 'Title must be greater than 10 characters',
+    ],
+
   })
 
-  const submit = () => {
-    console.log(state.title, state.content)
+  const submit = async () => {
+    console.log(state.title, state.content, form.value.validate())
+
+    const { valid } = await form.value.validate()
+    console.log('valid', valid)
+
+    if (valid) {
+      console.log('validation ', state.title, state.content, state.due, valid)
+      const project = {
+        title: state.title,
+        content: state.content,
+        due: state.due,
+        person: 'Monsieur Ninja',
+        status: 'ongoing'
+      }
+
+      console.log('le projet', project)
+
+      // Add a new document with a generated id
+      const projetRef = doc(collection(db, "projects"));
+      console.log('project ref', projetRef)
+
+      // later...
+      const resultat = await setDoc(projetRef, project)
+      console.log('resultat', resultat)
+      console.log('je suis la')
+
+    }
+    
+    
   }
+
+
+
 
 </script>
