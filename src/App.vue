@@ -56,7 +56,8 @@
 
 <script setup>
 
-import { ref,  } from 'vue'
+
+import { ref, } from 'vue'
 
 import Navigation from '@/components/Navigation.vue'
 import Footer from '@/components/Footer.vue'
@@ -65,6 +66,7 @@ import Footer from '@/components/Footer.vue'
 
 const drawer = ref(true)
 const rail = ref(true)
+
 
 
 </script>

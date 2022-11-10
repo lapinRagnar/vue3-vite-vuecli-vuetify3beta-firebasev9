@@ -67,13 +67,14 @@
 <script setup>
 
   import { ref, reactive, onMounted } from 'vue'
-  import db from '@/firebase/config.js'
+  import {db} from '@/firebase/config.js'
   import { collection, addDoc, setDoc, doc } from "firebase/firestore"; 
 
   const dialog = ref(false)
 
   const form = ref(null)
   const loading = ref(false)
+  
 
   const state = reactive({ 
     title: '',
@@ -94,13 +95,18 @@
   })
 
   const submit = async () => {
+
+    loading.value = false
+
     console.log(state.title, state.content, form.value.validate())
 
     const { valid } = await form.value.validate()
     console.log('valid', valid)
 
     if (valid) {
-      console.log('validation ', state.title, state.content, state.due, valid)
+      
+      console.log('--------validation ------------- ', state.title, state.content, state.due, valid)
+
       const project = {
         title: state.title,
         content: state.content,
@@ -109,23 +115,23 @@
         status: 'ongoing'
       }
 
-      console.log('le projet', project)
+      console.log('-------le projet-------', project)
 
-      // Add a new document with a generated id
-      const projetRef = doc(collection(db, "projects"));
-      console.log('project ref', projetRef)
+      const dbRef = collection(db, "projects")
+      // const docRef = doc(db, "projects", "mon-super-id-1" )
+      console.log('project ref', dbRef)
 
-      // later...
-      const resultat = await setDoc(projetRef, project)
-      console.log('resultat', resultat)
-      console.log('je suis la')
+      await addDoc(dbRef, {title: 'salut', person: 'moi meme', content: 'mon contenu', status: 'complete', due: '12/02/2022'})
+      .then(docRef => {
+        console.log('document bien enregistré', docRef)
+        loading.value = false
+        dialog.value = false
+      })
+      .catch(error => {
+        console.log(error);
+      })
 
-    }
-    
-    
+    }    
   }
-
-
-
 
 </script>
