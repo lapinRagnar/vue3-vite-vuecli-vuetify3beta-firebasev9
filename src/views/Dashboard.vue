@@ -4,9 +4,32 @@
 
     <h1 class="text-h3 text-brown-darken-2 text-center"> Dashboard</h1>
 
+    <!-- message de succes et d'echec pour firebase - ajout project -->
+  <div>
+    salut
+    <v-snackbar
+      v-model="snackbar"
+      timeout="3000"
+      top
+    > 
+
+      {{ text }}
+
+      <template v-slot:actions>
+        <v-btn
+          color="pink"
+          variant="text"
+          @click="snackbar = false"
+        >
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
+  </div>
+
     <v-container fluid  class="my-5">
 
-      <Popup />
+      <Popup @projectAdded="snackbar = true" />
 
       <v-row class="mb-3 mt-10">
         
@@ -100,6 +123,10 @@
   const sortBy = (critere) => {
     projects.value.sort((a, b) => a[critere] < b[critere] ? -1 : 1)
   }
+
+
+  const snackbar = ref(true)
+  const text = ref('Tu viens d\'ajouter un nouveau projet')
 
 </script>
 

@@ -66,7 +66,7 @@
 
 <script setup>
 
-  import { ref, reactive, onMounted } from 'vue'
+  import { ref, reactive, defineEmits } from 'vue'
   import {db} from '@/firebase/config.js'
   import { collection, addDoc, setDoc, doc } from "firebase/firestore"; 
 
@@ -120,6 +120,8 @@
       const dbRef = collection(db, "projects")
       // const docRef = doc(db, "projects", "mon-super-id-1" )
       console.log('project ref', dbRef)
+
+      
 
       await addDoc(dbRef, {title: 'salut', person: 'moi meme', content: 'mon contenu', status: 'complete', due: '12/02/2022'})
       .then(docRef => {

@@ -60,6 +60,8 @@
       
     </v-toolbar>
   </nav>
+
+  
 </template>
 
 <script setup>
@@ -71,6 +73,7 @@
 
   const router = useRouter()
   const titre = ref(null)
+
 
   router.beforeEach((to, from, next) => {
     titre.value = to.meta.title
