@@ -20,6 +20,40 @@
         <v-icon>mdi-information-variant</v-icon>
       </v-btn>
 
+      <!-- dropdown -->
+
+    
+
+      <v-menu>
+
+        <template v-slot:activator="{ props }" >
+          <v-btn
+            flat
+            v-bind="props"
+            @click="handleToggleIconMenu"
+          >
+            <v-icon> {{ toggleIconMenu ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
+            
+            <span>Menu</span>
+
+          </v-btn>
+        </template>
+        <v-list>
+          <v-list-item
+            v-for="(link, index) in links"
+            :key="index"
+            :value="index"
+            :to="link.route"
+            class="d-flex" 
+          >
+            <v-list-item-title >
+              <v-icon>{{ link.icon }}</v-icon>
+              {{ link.text }}
+            </v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
+
       <v-btn color="grey">
         <v-icon right>mdi-location-exit</v-icon>
       </v-btn>
@@ -30,24 +64,31 @@
 
 <script setup>
 
-import { useRouter } from 'vue-router'
-import { ref } from 'vue'
+  import { useRouter } from 'vue-router'
+  import { ref, computed } from 'vue'
+  
+  const toggleIconMenu = ref(false)
 
-const router = useRouter()
+  const router = useRouter()
+  const titre = ref(null)
 
-console.log('router', router)
+  router.beforeEach((to, from, next) => {
+    titre.value = to.meta.title
+    console.log('le titre dans to', titre.value)
+    next()
+  })
+  
+  const links = ref([
+    { icon: 'mdi-home', text: 'Dashboard', route: '/'},
+    { icon: 'mdi-calendar-range', text: 'My Projects', route: '/project'},
+    { icon: 'mdi-microsoft-teams', text: 'Team', route: '/team'},
+  ])
 
-const titre = ref(null)
-
-router.beforeEach((to, from, next) => {
-  titre.value = to.meta.title
-  console.log('le titre dans to', titre.value)
-  next()
-})
-console.log('aaaaa o')
-
-
-
+  const handleToggleIconMenu = () => {
+    console.log('ca marche, valeur =', toggleIconMenu.value)
+    toggleIconMenu.value = !toggleIconMenu.value
+  }
+ 
 
 </script>
 
