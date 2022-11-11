@@ -5,27 +5,26 @@
     <h1 class="text-h3 text-brown-darken-2 text-center"> Dashboard</h1>
 
     <!-- message de succes et d'echec pour firebase - ajout project -->
-  <div>
-    salut
-    <v-snackbar
-      v-model="snackbar"
-      timeout="3000"
-      top
-    > 
+    <div>
+      <v-snackbar
+        v-model="snackbar"
+        timeout="3000"
+        location="top"
+      > 
 
-      {{ text }}
+        {{ text }}
 
-      <template v-slot:actions>
-        <v-btn
-          color="pink"
-          variant="text"
-          @click="snackbar = false"
-        >
-          Close
-        </v-btn>
-      </template>
-    </v-snackbar>
-  </div>
+        <template v-slot:actions>
+          <v-btn
+            color="pink"
+            variant="text"
+            @click="snackbar = false"
+          >
+            Close
+          </v-btn>
+        </template>
+      </v-snackbar>
+    </div>
 
     <v-container fluid  class="my-5">
 
@@ -109,19 +108,11 @@
 <script setup>
 
   import { ref, onMounted } from 'vue'
-
   import Popup from '@/components/Popup.vue'
-
   import { db } from '@/firebase/config.js'
+  import { doc, onSnapshot, query, collection , getDocs } from "firebase/firestore";
 
-  import { doc, onSnapshot, query, collection , getDoc } from "firebase/firestore";
-
-  const projects = ref([
-    { title: 'Design a new website', person: 'The Net Ninja', due: '1st Jan 2019', status: 'ongoing', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!'},
-    { title: 'Code up the homepage', person: 'Chun Li', due: '10th Jan 2019', status: 'complete', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!'},
-    { title: 'Design video thumbnails', person: 'Ryu', due: '20th Dec 2018', status: 'complete', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!'},
-    { title: 'Create a community forum', person: 'Gouken', due: '20th Oct 2018', status: 'overdue', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!'},
-  ])
+  const projects = ref([])
 
 
   const sortBy = (critere) => {
@@ -129,32 +120,38 @@
   }
 
 
-  const snackbar = ref(true)
+  const snackbar = ref(false)
   const text = ref('Tu viens d\'ajouter un nouveau projet')
 
   onMounted( async () => {
+
     console.log('la db', db)
+
+    const q = query(collection(db, "projects"))
+    console.log('query------', q)
     
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
 
-    // const q = query(collection(db, "projects"))
-    // console.log('query------', q)
-    // const unsubscribe = onSnapshot(q, (querySnapshot) => {
-    //   const projects = [];
-    //   querySnapshot.forEach((doc) => {
-    //       projects.push(doc.data());
-    //   });
-    //   console.log("Current cities in CA: ", projects.join(", "));
-    // })
+      querySnapshot.forEach((doc) => {
+        
+        projects.value.push({
+          ...doc.data(),
+          id: doc.data().id
+        })
 
-    const docRef = doc(db, "cities", "SF");
-    const docSnap = await getDoc(docRef)
+      })
+      console.log("les projets : ", projects.value);
+    })
 
-    if (docSnap.exists()) {
-      console.log("Document data:", docSnap.data())
-    } else {
-      // doc.data() will be undefined in this case
-      console.log("No such document!")
-    }
+
+
+    
+    // const q = query(collection(db, "projects"));
+
+    // const querySnapshot = await getDocs(q);
+    // querySnapshot.forEach((doc) => {
+    //   console.log(doc.id, " => ", doc.data());
+    // });
 
   })
 

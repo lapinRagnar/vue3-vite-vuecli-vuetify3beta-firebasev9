@@ -66,7 +66,7 @@
 
 <script setup>
 
-  import { ref, reactive, defineEmits } from 'vue'
+  import { ref, reactive } from 'vue'
   import {db} from '@/firebase/config.js'
   import { collection, addDoc, setDoc, doc } from "firebase/firestore"; 
 
@@ -75,6 +75,7 @@
   const form = ref(null)
   const loading = ref(false)
   
+  const emit = defineEmits(['projectAdded'])
 
   const state = reactive({ 
     title: '',
@@ -105,7 +106,6 @@
 
     if (valid) {
       
-      console.log('--------validation ------------- ', state.title, state.content, state.due, valid)
 
       const project = {
         title: state.title,
@@ -115,19 +115,14 @@
         status: 'ongoing'
       }
 
-      console.log('-------le projet-------', project)
+      const dbRef = collection(db, "projects")      
 
-      const dbRef = collection(db, "projects")
-      // const docRef = doc(db, "projects", "mon-super-id-1" )
-      console.log('project ref', dbRef)
-
-      
-
-      await addDoc(dbRef, {title: 'salut', person: 'moi meme', content: 'mon contenu', status: 'complete', due: '12/02/2022'})
+      await addDoc(dbRef, project)
       .then(docRef => {
         console.log('document bien enregistré', docRef)
         loading.value = false
         dialog.value = false
+        emit('projectAdded')
       })
       .catch(error => {
         console.log(error);

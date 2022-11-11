@@ -67,7 +67,7 @@
 <script setup>
 
   import { useRouter } from 'vue-router'
-  import { ref, computed } from 'vue'
+  import { ref,  } from 'vue'
   
   const toggleIconMenu = ref(false)
 
