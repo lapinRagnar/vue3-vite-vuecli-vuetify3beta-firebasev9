@@ -36,7 +36,8 @@
 
 <script setup>
 
-  import { ref, reactive, computed } from 'vue'
+  import { reactive, computed } from 'vue'
+  import { collection, query, where, onSnapshot } from "firebase/firestore"
 
 
   const donnees = reactive({
@@ -55,5 +56,19 @@
   const myProjects = computed(() => {
     return donnees.projects.filter(project => project.person === 'The Net Ninja' )
   })
+
+  // crud read one
+
+  // const q = query(collection(db, "projects"));
+
+  // const querySnapshot = await getDocs(q)
+  // querySnapshot.forEach((doc) => {
+  //   console.log(doc.id, " => ", doc.data())
+  //   projects.value.push({
+  //     ...doc.data(),
+  //     id: doc.data().id
+  //   })
+  // });
+
 
 </script>

@@ -24,6 +24,7 @@
           </v-btn>
         </template>
       </v-snackbar>
+
     </div>
 
     <v-container fluid  class="my-5">
@@ -110,7 +111,7 @@
   import { ref, onMounted } from 'vue'
   import Popup from '@/components/Popup.vue'
   import { db } from '@/firebase/config.js'
-  import { doc, onSnapshot, query, collection , getDocs } from "firebase/firestore";
+  import { doc, onSnapshot, query, collection, getDocs } from "firebase/firestore";
 
   const projects = ref([])
 
@@ -125,33 +126,63 @@
 
   onMounted( async () => {
 
-    console.log('la db', db)
-
-    const q = query(collection(db, "projects"))
-    console.log('query------', q)
+    // misy probleme, ca affiche 2 fois les données
+    // const q = query(collection(db, "projects"))
+    // console.log('query------', q)
     
-    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+    // const unsubscribe = onSnapshot(q, (querySnapshot) => {
 
-      querySnapshot.forEach((doc) => {
+    //   querySnapshot.forEach((doc) => {
         
-        projects.value.push({
-          ...doc.data(),
-          id: doc.data().id
-        })
+    //     projects.value.push({
+    //       ...doc.data(),
+    //       id: doc.data().id
+    //     })
 
-      })
-      console.log("les projets : ", projects.value);
-    })
+    //   })
+    //   console.log("les projets : ", projects.value);
+    // })
 
 
 
-    
+    /// misy probleme - ca ne met pas à jour les données en direct
     // const q = query(collection(db, "projects"));
 
-    // const querySnapshot = await getDocs(q);
+    // const querySnapshot = await getDocs(q)
     // querySnapshot.forEach((doc) => {
-    //   console.log(doc.id, " => ", doc.data());
+    //   console.log(doc.id, " => ", doc.data())
+    //   projects.value.push({
+    //     ...doc.data(),
+    //     id: doc.data().id
+    //   })
     // });
+
+
+    // afficher les projets - crud read all
+
+    const q = query(collection(db, "projects"))
+
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+
+      snapshot.docChanges().forEach((change) => {
+
+        if (change.type === "added") {
+
+          projects.value.push({
+            ...change.doc.data(),
+            id: change.doc.data().id
+          })
+
+        }
+        if (change.type === "modified") {
+          console.log("Modified city: ", change.doc.data())
+        }
+        if (change.type === "removed") {
+          console.log("Removed city: ", change.doc.data())
+        }
+      })
+
+    })
 
   })
 

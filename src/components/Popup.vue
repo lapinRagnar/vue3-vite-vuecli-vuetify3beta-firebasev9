@@ -71,12 +71,9 @@
   import { collection, addDoc, setDoc, doc } from "firebase/firestore"; 
 
   const dialog = ref(false)
-
   const form = ref(null)
-  const loading = ref(false)
-  
+  const loading = ref(false)  
   const emit = defineEmits(['projectAdded'])
-
   const state = reactive({ 
     title: '',
     content: '',
@@ -115,6 +112,8 @@
         status: 'ongoing'
       }
 
+      // crud create projets
+      
       const dbRef = collection(db, "projects")      
 
       await addDoc(dbRef, project)
