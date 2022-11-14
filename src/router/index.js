@@ -2,6 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Dashboard from '@/views/Dashboard.vue'
 import Team from '@/views/Team.vue'
 import Project from '@/views/Project.vue'
+import Signup from '@/views/auth/Signup.vue'
+import Login from '@/views/auth/Login.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -38,6 +40,25 @@ const router = createRouter({
         title: 'Team'
       }
     },
+
+    // authentication
+    {
+      path: '/login',
+      name: 'login',
+      component: Login,
+      meta: {
+        title: 'Login'
+      }
+    },
+    {
+      path: '/signup',
+      name: 'signup',
+      component: Signup,
+      meta: {
+        title: 'Sign Up'
+      }
+    },
+
     {
       path: '/about',
       name: 'about',

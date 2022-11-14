@@ -5,14 +5,14 @@ import { collection, onSnapshot, query } from 'firebase/firestore'
 
 export const useProjectStore = defineStore('project', () => {
   
-  // les states
+  // ******** les states ********
   const projects = ref([])
 
-  // les guetters
+  // ******** les guetters ********
 
 
 
-  // les actions
+  // ******** les actions ********
 
   // afficher tous les projets
   async function getProjects() {

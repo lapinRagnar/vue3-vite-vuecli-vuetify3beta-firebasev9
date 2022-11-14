@@ -54,6 +54,16 @@
         </v-list>
       </v-menu>
 
+      <!-- lien login et signup -->
+
+      <v-btn :to="{name: 'login'}" color="grey">
+        <v-icon right>mdi-account-outline</v-icon>
+      </v-btn>
+
+      <v-btn :to="{name: 'signup'}" color="grey">
+        <v-icon right>mdi-account-edit-outline</v-icon>
+      </v-btn>
+
       <v-btn color="grey">
         <v-icon right>mdi-location-exit</v-icon>
       </v-btn>

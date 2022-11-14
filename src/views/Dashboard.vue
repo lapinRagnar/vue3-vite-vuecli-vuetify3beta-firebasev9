@@ -67,8 +67,6 @@
       
         <v-row :class="` project ${project.status} `">
           
-          {{ project.id }}
-          
 
           <v-col cols="12" md="6" >
             <div class="caption text-grey">Project Title</div>
@@ -115,10 +113,13 @@
   import Popup from '@/components/Popup.vue'
   
   import { useProjectStore } from '@/stores/project.js'
+  import { useAuthStore } from '@/stores/auth.js'
   import { storeToRefs } from 'pinia';
 
   const projectStore = useProjectStore()
   const { projects } = storeToRefs(projectStore)
+
+  const authStore = useAuthStore()
 
   const sortBy = (critere) => {
     projects.value.sort((a, b) => a[critere] < b[critere] ? -1 : 1)
