@@ -111,96 +111,21 @@
 
 <script setup>
 
-  import { ref, onMounted } from 'vue'
+  import { ref, } from 'vue'
   import Popup from '@/components/Popup.vue'
-  import { db } from '@/firebase/config.js'
-  import { doc, onSnapshot, query, collection, getDocs } from "firebase/firestore";
-
+  
   import { useProjectStore } from '@/stores/project.js'
+  import { storeToRefs } from 'pinia';
 
   const projectStore = useProjectStore()
-
-  console.log('projectStore dashboard', projectStore)
-
-  const projects = ref([])
-
+  const { projects } = storeToRefs(projectStore)
 
   const sortBy = (critere) => {
     projects.value.sort((a, b) => a[critere] < b[critere] ? -1 : 1)
   }
 
-
   const snackbar = ref(false)
   const text = ref('Tu viens d\'ajouter un nouveau projet')
-
-  onMounted( async () => {
-
-    // misy probleme, ca affiche 2 fois les données
-    // const q = query(collection(db, "projects"))
-    // console.log('query------', q)
-    
-    // const unsubscribe = onSnapshot(q, (querySnapshot) => {
-
-    //   querySnapshot.forEach((doc) => {
-        
-    //     projects.value.push({
-    //       ...doc.data(),
-    //       id: doc.data().id
-    //     })
-
-    //   })
-    //   console.log("les projets : ", projects.value);
-    // })
-
-
-
-    /// misy probleme - ca ne met pas à jour les données en direct
-    // const q = query(collection(db, "projects"));
-
-    // const querySnapshot = await getDocs(q)
-    // querySnapshot.forEach((doc) => {
-    //   console.log(doc.id, " => ", doc.data())
-    //   projects.value.push({
-    //     ...doc.data(),
-    //     id: doc.data().id
-    //   })
-    // });
-
-
-    // afficher les projets - crud read all
-    // afficher tous les projets
-    const q = query(collection(db, "projects"))
-    onSnapshot(q, (snapshot) => {
-
-      snapshot.docChanges().forEach((change) => {
-
-        if (change.type === "added") {
-
-          projects.value.push({
-            ...change.doc.data(),
-            id: change.doc.id
-          })
-
-        }
-        if (change.type === "modified") {
-          console.log("Modified city: ", change.doc.data())
-        }
-        if (change.type === "removed") {
-          console.log("Removed city: ", change.doc.data())
-        }
-      })
-    })
-
-    console.log('tous les projets', projects.value)
-
-
-    // afficher un projet d'un utilisateur par titre
-    
-
-  })
-
-
-  
 
 </script>
 
