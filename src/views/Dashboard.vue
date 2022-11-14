@@ -116,6 +116,12 @@
   import { db } from '@/firebase/config.js'
   import { doc, onSnapshot, query, collection, getDocs } from "firebase/firestore";
 
+  import { useProjectStore } from '@/stores/project.js'
+
+  const projectStore = useProjectStore()
+
+  console.log('projectStore dashboard', projectStore)
+
   const projects = ref([])
 
 
