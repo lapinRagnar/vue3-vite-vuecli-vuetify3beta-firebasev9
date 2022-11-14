@@ -67,9 +67,12 @@
       
         <v-row :class="` project ${project.status} `">
           
-          <v-col cols="12" md="6">
+          {{ project.id }}
+          
+
+          <v-col cols="12" md="6" >
             <div class="caption text-grey">Project Title</div>
-            <div>{{ project.title }}</div>
+            <div >{{ project.title }}</div>
           </v-col>
 
           <v-col cols="6" sm="4" md="2">
@@ -159,10 +162,9 @@
 
 
     // afficher les projets - crud read all
-
+    // afficher tous les projets
     const q = query(collection(db, "projects"))
-
-    const unsubscribe = onSnapshot(q, (snapshot) => {
+    onSnapshot(q, (snapshot) => {
 
       snapshot.docChanges().forEach((change) => {
 
@@ -170,7 +172,7 @@
 
           projects.value.push({
             ...change.doc.data(),
-            id: change.doc.data().id
+            id: change.doc.id
           })
 
         }
@@ -181,10 +183,18 @@
           console.log("Removed city: ", change.doc.data())
         }
       })
-
     })
 
+    console.log('tous les projets', projects.value)
+
+
+    // afficher un projet d'un utilisateur par titre
+    
+
   })
+
+
+  
 
 </script>
 

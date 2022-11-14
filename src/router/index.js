@@ -23,6 +23,14 @@ const router = createRouter({
       }
     },
     {
+      path: '/project/:titre',
+      name: 'projectId',
+      component: Project,
+      meta: {
+        title: 'Project Detail'
+      }
+    },
+    {
       path: '/team',
       name: 'team',
       component: Team,

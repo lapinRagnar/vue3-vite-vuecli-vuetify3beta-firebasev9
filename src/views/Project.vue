@@ -2,6 +2,8 @@
   <div>
     <h1 class="text-h3 text-brown-darken-2 text-center">Project</h1>
 
+    <div>User {{ $route.params.id }}</div>
+
     <v-container class="my-5">
       
       <div class="text-subtitle-2 mb-2">Project title</div>
