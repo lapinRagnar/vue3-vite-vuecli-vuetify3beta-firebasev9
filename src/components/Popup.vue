@@ -39,9 +39,6 @@
               prepend-icon="mdi-calendar-range "
             />
 
-     
-
-
 
             <v-btn
               color="success"
