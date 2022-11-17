@@ -73,7 +73,9 @@
 
           <v-col cols="12" md="6" >
             <div class="caption text-grey">Project Title</div>
-            <div >{{ project.title }}</div>
+            <div >
+              <router-link :to="{ name: 'editProject', params: { id: project.id }}">{{ project.title }}</router-link>
+            </div>
           </v-col>
 
           <v-col cols="6" sm="4" md="2">
@@ -123,6 +125,7 @@
   const { projects } = storeToRefs(projectStore)
 
   const authStore = useAuthStore()
+
 
   onMounted(() => {
 

@@ -2,7 +2,7 @@
   <div>
     <h1 class="text-h3 text-brown-darken-2 text-center">Project</h1>
 
-    <div>User {{ $route.params.id }}</div>
+    <div>User - {{ $route.params.id }}</div>
 
     <v-container class="my-5">
       
@@ -58,6 +58,8 @@
   const myProjects = computed(() => {
     return donnees.projects.filter(project => project.person === 'The Net Ninja' )
   })
+
+  
 
   // crud read one
 

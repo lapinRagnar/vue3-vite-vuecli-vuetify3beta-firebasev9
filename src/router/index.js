@@ -1,9 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router'
+
 import Dashboard from '@/views/Dashboard.vue'
 import Team from '@/views/Team.vue'
-import Project from '@/views/Project.vue'
+import Project from '@/views/project/Project.vue'
 import Signup from '@/views/auth/Signup.vue'
 import Login from '@/views/auth/Login.vue'
+import EditProject from '@/views/project/EditProject.vue'
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -25,9 +28,9 @@ const router = createRouter({
       }
     },
     {
-      path: '/project/:titre',
-      name: 'projectId',
-      component: Project,
+      path: '/project/:id',
+      name: 'editProject',
+      component: EditProject,
       meta: {
         title: 'Project Detail'
       }
