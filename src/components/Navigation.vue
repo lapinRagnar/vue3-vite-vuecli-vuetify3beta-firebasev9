@@ -10,7 +10,7 @@
         <v-icon>mdi-home</v-icon>
       </v-btn>
 
-      <v-btn :to="{name: 'project'}">
+      <v-btn :to="{name: 'project'}"> 
         <v-icon>mdi-calendar-range</v-icon>
       </v-btn>
 
@@ -108,7 +108,7 @@
 
   router.beforeEach((to, from, next) => {
     titre.value = to.meta.title
-    console.log('le titre dans to', titre.value)
+    console.log('guard befoeEach - le titre dans to', titre.value)
     next()
   })
   

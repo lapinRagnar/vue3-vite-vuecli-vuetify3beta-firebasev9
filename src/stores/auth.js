@@ -9,7 +9,6 @@ import { useRouter } from "vue-router"
 
 export const useAuthStore = defineStore('auth', () => {
   
-  console.log('auth et app', auth, db)
   const user = reactive({
     email: '',
     password: '',
