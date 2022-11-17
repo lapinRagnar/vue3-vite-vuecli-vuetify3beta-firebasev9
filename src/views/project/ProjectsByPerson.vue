@@ -1,37 +1,36 @@
 <template>
+  
   <h1 class="text-h3 text-brown-darken-2 text-center">Project</h1>
-  <h4> id - {{ id }}</h4>
 
   <v-container class="my-5">
       
-      <div class="text-subtitle-2 mb-2">Project title</div>
-      
-      <v-expansion-panels>
-        <v-expansion-panel
-          :title="project.title"
-          v-for="project in projects" 
-          :key="project.title"          
-        >
+    <v-expansion-panels>
+      <v-expansion-panel
+        :title="project.title"
+        v-for="project in projects" 
+        :key="project.title"          
+      >
 
-            <v-expansion-panel-text>
+        <v-expansion-panel-text>
 
-              
-              <v-card-text>
-                <div class="font-weight-bold">creat by - {{ project.person}}</div>
-                <div >{{ project.due }}</div>
-                <div class="">info</div>
-                <div>status - {{ project.status }}</div>
-                <div> content - {{ project.content }}</div>
-              </v-card-text>
-              
+          
+          <v-card-text>
 
-            </v-expansion-panel-text>
+            <div class="text-h6 mb-10"> {{ project.content }}</div>
+            <div class="font-weight-bold">created by - {{ project.personUsername}}</div>
+            <div >Due date - {{ project.due }}</div>
+            
+            <div>Status - {{ project.status }}</div>
+          </v-card-text>
           
 
-        </v-expansion-panel>
-      </v-expansion-panels>
+        </v-expansion-panel-text>
+          
 
-    </v-container>
+      </v-expansion-panel>
+    </v-expansion-panels>
+
+  </v-container>
 
 
 </template>
