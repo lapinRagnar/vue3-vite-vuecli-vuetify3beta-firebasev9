@@ -29,7 +29,10 @@
 
     <v-container fluid  class="my-5">
 
-      <Popup @projectAdded="snackbar = true" />
+      <Popup
+        @projectAdded="snackbar = true"
+        v-if="authStore.user.isAuthenticated"
+      />
 
       <v-row class="mb-3 mt-10">
         
@@ -75,7 +78,7 @@
 
           <v-col cols="6" sm="4" md="2">
             <div class="caption text-grey">Person</div>
-            <div> {{ project.person }}</div>
+            <div> {{ project.personUsername }}</div>
           </v-col>
 
           <v-col cols="6" sm="4" md="2">
@@ -109,7 +112,7 @@
 
 <script setup>
 
-  import { ref, } from 'vue'
+  import { onMounted, ref, } from 'vue'
   import Popup from '@/components/Popup.vue'
   
   import { useProjectStore } from '@/stores/project.js'
@@ -120,6 +123,12 @@
   const { projects } = storeToRefs(projectStore)
 
   const authStore = useAuthStore()
+
+  onMounted(() => {
+
+    // projectStore.getProjects()
+
+  })
 
   const sortBy = (critere) => {
     projects.value.sort((a, b) => a[critere] < b[critere] ? -1 : 1)

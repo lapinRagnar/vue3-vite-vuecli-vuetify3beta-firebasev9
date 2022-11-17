@@ -7,6 +7,7 @@ import { collection, addDoc, } from "firebase/firestore";
 
 import { useRouter } from "vue-router"
 
+
 export const useAuthStore = defineStore('auth', () => {
   
   const user = reactive({
@@ -23,7 +24,6 @@ export const useAuthStore = defineStore('auth', () => {
 
   const router = useRouter()
 
-  
 
 
   async function signup() {
@@ -93,6 +93,7 @@ export const useAuthStore = defineStore('auth', () => {
     await signOut(auth)
     .then(async () => {
       console.log('bien deconnecté!')
+
       await router.push({ name: 'dashboard'})
     }).catch((error) => {
       console.log('error', error)
@@ -119,6 +120,7 @@ export const useAuthStore = defineStore('auth', () => {
         user.password = ''
         user.id = ''
         user.isAuthenticated = false
+        
       }
     })
   }

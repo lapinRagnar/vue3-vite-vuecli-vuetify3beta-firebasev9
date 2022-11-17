@@ -65,12 +65,17 @@
 
   import { ref, reactive } from 'vue'
   import {db} from '@/firebase/config.js'
-  import { collection, addDoc, setDoc, doc } from "firebase/firestore"; 
+  import { collection, addDoc, setDoc, doc } from "firebase/firestore"
+  
+  import { useAuthStore } from '@/stores/auth'
+
+  const authStore = useAuthStore()
 
   const dialog = ref(false)
   const form = ref(null)
   const loading = ref(false)  
   const emit = defineEmits(['projectAdded'])
+  
   const state = reactive({ 
     title: '',
     content: '',
@@ -91,21 +96,21 @@
 
   const submit = async () => {
 
-    loading.value = false
-
-    console.log(state.title, state.content, form.value.validate())
+    loading.value = true
 
     const { valid } = await form.value.validate()
     console.log('valid', valid)
 
+    console.log('utilisateur', authStore.user)
+
     if (valid) {
       
-
       const project = {
         title: state.title,
         content: state.content,
         due: state.due,
-        person: 'Monsieur Ninja',
+        personId: authStore.user.id,
+        personUsername: authStore.user.email.substr(0, authStore.user.email.indexOf('@')), // recuperer le nom avant l'arobas de l'email
         status: 'ongoing'
       }
 
