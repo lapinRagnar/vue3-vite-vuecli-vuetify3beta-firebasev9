@@ -1,5 +1,5 @@
 <template>
-  
+
   <h1 class="text-h3 text-brown-darken-2 text-center">Project</h1>
 
   <v-container class="my-5">
@@ -7,7 +7,7 @@
     <v-expansion-panels>
       <v-expansion-panel
         :title="project.title"
-        v-for="project in projects" 
+        v-for="project in projetsParId" 
         :key="project.title"          
       >
 
@@ -43,7 +43,7 @@
  
 
   const projectStore = useProjectStore()
-  const { projects } = storeToRefs(projectStore)
+  const { projetsParId } = storeToRefs(projectStore)
   
 
   const router = useRoute()

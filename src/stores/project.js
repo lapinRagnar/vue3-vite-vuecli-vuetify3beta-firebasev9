@@ -1,12 +1,14 @@
 import { ref, } from 'vue'
 import { defineStore } from 'pinia'
 import { db } from '@/firebase/config.js'
-import { collection, onSnapshot, query, where } from 'firebase/firestore'
+import { collection, getDocs, onSnapshot, query, where } from 'firebase/firestore'
 
 export const useProjectStore = defineStore('project', () => {
   
   // ******** les states ********
   const projects = ref([])
+  const projet = ref([])
+  const projetsParId = ref([])
 
   // ******** les guetters ********
 
@@ -44,35 +46,46 @@ export const useProjectStore = defineStore('project', () => {
   getProjects()
 
 
-  // get a projects by id
+  // get projects by id ou by person
   async function getProjectById(id) {
-    console.log('je suis dans mon store getProjectById :', id)
+
+    projetsParId.$reset()
+    
+    console.log('getProjectById :', id)
     
     const q = query(collection(db, "projects"), where("personId", "==", id))
-    onSnapshot(q, (snapshot) => {
-
-      snapshot.docChanges().forEach((change) => {
-
-        if (change.type === "added") {
-
-          projects.value.push({
-            ...change.doc.data(),
-            id: change.doc.id
-          })
-
-        }
-        if (change.type === "modified") {
-          console.log("Modified city: ", change.doc.data())
-        }
-        if (change.type === "removed") {
-          console.log("Removed city: ", change.doc.data())
-        }
+    const querySnapshot = await getDocs(q)
+    querySnapshot.forEach((doc) => {
+      console.log(doc.id, " => ", doc.data())
+      projetsParId.value.push({
+        ...doc.data(),
       })
     })
-    console.log('tous les projets dans le store', projects.value)
+    console.log('dans getProjectById ', projetsParId.value)
+  }
+
+
+  // edit project
+  async function editProject(id) {
+
+
+    console.log('je suis dans editProject :', id)
+    
+    console.log('le state projet', projet.value)
+
+    const q = query(collection(db, "projects"), where("projectId", "==", id))
+    const querySnapshot = await getDocs(q)
+    querySnapshot.forEach((doc) => {
+      console.log(doc.id, " => ", doc.data())
+      projet.value.push({
+        ...doc.data(),
+      })
+    })
+    console.log('dans edit project store ', projet.value)
+
   }
   
 
 
-  return { projects, getProjects, getProjectById }
+  return { projects, getProjects, getProjectById, editProject, projet, projetsParId }
 })

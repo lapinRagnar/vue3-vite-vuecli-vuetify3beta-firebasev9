@@ -6,6 +6,7 @@ import Project from '@/views/project/Project.vue'
 import Signup from '@/views/auth/Signup.vue'
 import Login from '@/views/auth/Login.vue'
 import ProjectsByPerson from '@/views/project/ProjectsByPerson.vue'
+import EditProject from '@/views/project/EditProject.vue'
 
 
 const router = createRouter({
@@ -25,6 +26,14 @@ const router = createRouter({
       component: Project,
       meta: {
         title: 'Project'
+      }
+    },
+    {
+      path: '/project/:id',
+      name: 'editProject',
+      component: EditProject,
+      meta: {
+        title: 'Project Detail'
       }
     },
     {

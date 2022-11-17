@@ -74,14 +74,16 @@
           <v-col cols="12" md="6" >
             <div class="caption text-grey">Project Title</div>
             <div >
-              <!-- <router-link :to="{ name: 'editProject', params: { id: project.id }}">{{ project.title }}</router-link> -->
-              <div>{{ project.title }}</div>
+              <router-link :to="{ name: 'editProject', params: { id: project.id }}">{{ project.title }}</router-link>
             </div>
+            <pre>
+              {{ project }}
+            </pre>
           </v-col>
 
           <v-col cols="6" sm="4" md="2">
             <div class="caption text-grey">Person</div>
-            <router-link :to="{ name: 'projectsByPerson', params: { id: project.id }}">{{ project.personUsername  }}</router-link>
+            <router-link :to="{ name: 'projectsByPerson', params: { id: project.personId }}">{{ project.personUsername  }}</router-link>
           </v-col>
 
           <v-col cols="6" sm="4" md="2">

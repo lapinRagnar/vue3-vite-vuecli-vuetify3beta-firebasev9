@@ -105,20 +105,38 @@
 
     if (valid) {
       
+
+
+      // crud create projets
+      
+      // const dbRef = collection(db, "projects")      
+
+      // await addDoc(dbRef, project)
+      // .then(docRef => {
+      //   console.log('document bien enregistré', docRef)
+      //   loading.value = false
+      //   dialog.value = false
+      //   emit('projectAdded')
+      // })
+      // .catch(error => {
+      //   console.log(error);
+      // })
+
+      const newProjectRef = doc(collection(db, "projects"))
+
+      console.log('newProjectRef', newProjectRef.id)
+
       const project = {
         title: state.title,
         content: state.content,
         due: state.due,
         personId: authStore.user.id,
         personUsername: authStore.user.email.substr(0, authStore.user.email.indexOf('@')), // recuperer le nom avant l'arobas de l'email
-        status: 'ongoing'
+        status: 'ongoing',
+        projectId: newProjectRef.id
       }
 
-      // crud create projets
-      
-      const dbRef = collection(db, "projects")      
-
-      await addDoc(dbRef, project)
+      await setDoc(newProjectRef, project)
       .then(docRef => {
         console.log('document bien enregistré', docRef)
         loading.value = false
@@ -126,7 +144,7 @@
         emit('projectAdded')
       })
       .catch(error => {
-        console.log(error);
+        console.log(error)
       })
 
     }    
