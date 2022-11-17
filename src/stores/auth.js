@@ -2,7 +2,9 @@ import { computed, reactive, ref } from 'vue'
 import { defineStore } from 'pinia'
 import { auth, db } from '@/firebase/config.js'
 import { createUserWithEmailAndPassword } from "firebase/auth"
+import { signInWithEmailAndPassword } from "firebase/auth"
 import { collection, addDoc, } from "firebase/firestore"; 
+import { useRouter } from "vue-router"
 
 export const useAuthStore = defineStore('auth', () => {
   
@@ -15,6 +17,8 @@ export const useAuthStore = defineStore('auth', () => {
     loading: false
 
   })
+
+  const router = useRouter()
 
   
 
@@ -48,7 +52,9 @@ export const useAuthStore = defineStore('auth', () => {
       })
       .catch(error => {
         console.log(error);
-      })    
+      })
+      
+      await router.push({ name: 'dashboard'})
 
 
     })
@@ -61,5 +67,24 @@ export const useAuthStore = defineStore('auth', () => {
 
   }
 
-  return { user, signup, currentUser }
+  async function login() {
+    
+    await signInWithEmailAndPassword(auth, user.email, user.password)
+    .then( async (userCredential) => {
+      // Signed in 
+      const user = userCredential.user
+      console.log('user ', user)
+      
+      await router.push({ name: 'dashboard'})
+
+    })
+    .catch((error) => {
+      const errorCode = error.code
+      const errorMessage = error.message
+      console.log('errorCode, errorMessage', errorCode, errorMessage)
+    })
+
+  }
+
+  return { user, signup, login}
 })
