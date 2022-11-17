@@ -5,7 +5,7 @@ import Team from '@/views/Team.vue'
 import Project from '@/views/project/Project.vue'
 import Signup from '@/views/auth/Signup.vue'
 import Login from '@/views/auth/Login.vue'
-import EditProject from '@/views/project/EditProject.vue'
+import ProjectsByPerson from '@/views/project/ProjectsByPerson.vue'
 
 
 const router = createRouter({
@@ -28,9 +28,9 @@ const router = createRouter({
       }
     },
     {
-      path: '/project/:id',
-      name: 'editProject',
-      component: EditProject,
+      path: '/projects/:id',
+      name: 'projectsByPerson',
+      component: ProjectsByPerson,
       meta: {
         title: 'Project Detail'
       }
