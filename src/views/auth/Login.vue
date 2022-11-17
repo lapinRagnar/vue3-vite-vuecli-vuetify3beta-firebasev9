@@ -55,11 +55,16 @@
 
             </v-form>
 
+            <v-card-actions>
+              <v-btn
+                @click="goToSignUp"
+              >create an account</v-btn>
+            </v-card-actions>
+
           </v-card-text>
 
-          <pre class="text-left">
-            {{user }}
-          </pre>
+
+
         </v-card>
       
       </v-col>
@@ -77,11 +82,17 @@
   import { ref } from 'vue';
   import { useAuthStore } from '@/stores/auth'
   import { storeToRefs } from 'pinia'
+
+  import { useRouter } from "vue-router"
+
+
   const authStore = useAuthStore()
   const { user,  } = storeToRefs(authStore)
   
   const form = ref(null)
   const isValid = ref(true)
+
+  const router = useRouter()
 
   async function valider() {
     const { valid } = await form.value.validate()
@@ -92,6 +103,10 @@
     } else {
       console.log('erreur de creation de compte !')
     }
+  }
+
+  const goToSignUp = async () => {
+    await router.push({ name: 'signup'})
   }
 
 

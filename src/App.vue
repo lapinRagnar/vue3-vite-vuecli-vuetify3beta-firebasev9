@@ -56,23 +56,28 @@
 
 <script setup>
 
+import { useAuthStore } from '@/stores/auth'
 
-import { ref, } from 'vue'
+import { onMounted, ref, } from 'vue'
 
 import Navigation from '@/components/Navigation.vue'
 import Footer from '@/components/Footer.vue'
 
-
+const authStore = useAuthStore()
 
 const drawer = ref(true)
 const rail = ref(true)
+
+onMounted(() => {
+  authStore.initialisationUser()
+}) 
 
 
 
 </script>
 
 <style lang="scss">
-.v-list-item--active {
+  .v-list-item--active {
     background-color: rgb(145, 220, 129) !important;;
   }
 </style>

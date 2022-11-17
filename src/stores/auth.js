@@ -1,9 +1,10 @@
-import { computed, reactive, ref } from 'vue'
+import { reactive, } from 'vue'
 import { defineStore } from 'pinia'
+
 import { auth, db } from '@/firebase/config.js'
-import { createUserWithEmailAndPassword } from "firebase/auth"
-import { signInWithEmailAndPassword } from "firebase/auth"
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged   } from "firebase/auth"
 import { collection, addDoc, } from "firebase/firestore"; 
+
 import { useRouter } from "vue-router"
 
 export const useAuthStore = defineStore('auth', () => {
@@ -14,7 +15,10 @@ export const useAuthStore = defineStore('auth', () => {
     password: '',
     error: null,
     messageSucces: 'Merci, Bien enregistré!',
-    loading: false
+    loading: false,
+    id: '',
+    isAuthenticated: false,
+
 
   })
 
@@ -72,8 +76,7 @@ export const useAuthStore = defineStore('auth', () => {
     await signInWithEmailAndPassword(auth, user.email, user.password)
     .then( async (userCredential) => {
       // Signed in 
-      const user = userCredential.user
-      console.log('user ', user)
+      const utilisateur = userCredential.utilisateur
       
       await router.push({ name: 'dashboard'})
 
@@ -86,5 +89,41 @@ export const useAuthStore = defineStore('auth', () => {
 
   }
 
-  return { user, signup, login}
+  async function logout() {
+
+    await signOut(auth)
+    .then(async () => {
+      console.log('bien deconnecté!')
+      await router.push({ name: 'dashboard'})
+    }).catch((error) => {
+      console.log('error', error)
+    });
+
+  }
+
+
+  function initialisationUser() {
+
+    onAuthStateChanged(auth, (utilisateur) => {
+      if (utilisateur) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/firebase.User
+        user.id = utilisateur.uid
+        user.isAuthenticated = true
+        user.email = utilisateur.email
+        // ...
+      } else {
+        // User is signed out
+        // ...
+        console.log('user deconnecté')
+        user.email = ''
+        user.password = ''
+        user.id = ''
+        user.isAuthenticated = false
+      }
+    })
+  }
+
+
+  return { user, signup, login, logout, initialisationUser }
 })

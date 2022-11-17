@@ -4,6 +4,8 @@
 
       <v-toolbar-title class="text-uppercase"> <span class="text-green">{{ titre }}</span> | Tuto vuetify</v-toolbar-title>
 
+      <v-spacer></v-spacer>
+
       <v-btn :to="{name: 'dashboard'}">
         <v-icon>mdi-home</v-icon>
       </v-btn>
@@ -21,8 +23,6 @@
       </v-btn>
 
       <!-- dropdown -->
-
-    
 
       <v-menu>
 
@@ -56,15 +56,32 @@
 
       <!-- lien login et signup -->
 
-      <v-btn :to="{name: 'login'}" color="grey">
+      <v-btn
+        :to="{name: 'login'}"
+        color="grey"
+        v-if="!authStore.user.isAuthenticated"
+      >
         <v-icon right>mdi-account-outline</v-icon>
       </v-btn>
 
-      <v-btn :to="{name: 'signup'}" color="grey">
+      <!-- <v-btn
+        :to="{name: 'signup'}"
+        color="grey"
+        v-if="!authStore.user.isAuthenticated"
+      >
         <v-icon right>mdi-account-edit-outline</v-icon>
-      </v-btn>
+      </v-btn> -->
 
-      <v-btn color="grey">
+      <span
+        class="text-green text-caption"
+        v-if="authStore.user.isAuthenticated"
+      >({{authStore.user.email }})</span> 
+
+      <v-btn
+        color="grey"
+        @click="handleLogout"
+        v-if="authStore.user.isAuthenticated"
+      >
         <v-icon right>mdi-location-exit</v-icon>
       </v-btn>
       
@@ -78,7 +95,11 @@
 
   import { useRouter } from 'vue-router'
   import { ref,  } from 'vue'
-  
+
+  import { useAuthStore } from '@/stores/auth'
+
+  const authStore = useAuthStore()
+
   const toggleIconMenu = ref(false)
 
   const router = useRouter()
@@ -101,6 +122,10 @@
     console.log('ca marche, valeur =', toggleIconMenu.value)
     toggleIconMenu.value = !toggleIconMenu.value
   }
+
+  const handleLogout = () => {
+    authStore.logout()
+  } 
  
 
 </script>
