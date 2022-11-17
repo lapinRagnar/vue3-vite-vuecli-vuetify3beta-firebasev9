@@ -49,8 +49,8 @@ export const useProjectStore = defineStore('project', () => {
   // get projects by id ou by person
   async function getProjectById(id) {
 
-    projetsParId.$reset()
-    
+    projetsParId.value = []
+
     console.log('getProjectById :', id)
     
     const q = query(collection(db, "projects"), where("personId", "==", id))
@@ -68,7 +68,8 @@ export const useProjectStore = defineStore('project', () => {
   // edit project
   async function editProject(id) {
 
-
+    projet.value = []
+    
     console.log('je suis dans editProject :', id)
     
     console.log('le state projet', projet.value)
