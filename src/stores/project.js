@@ -1,14 +1,18 @@
 import { ref, } from 'vue'
 import { defineStore } from 'pinia'
 import { db } from '@/firebase/config.js'
-import { collection, getDocs, onSnapshot, query, where } from 'firebase/firestore'
+import { collection, getDocs, onSnapshot, query, where, updateDoc, doc  } from 'firebase/firestore'
+
+import { useRouter } from "vue-router"
 
 export const useProjectStore = defineStore('project', () => {
   
   // ******** les states ********
   const projects = ref([])
-  const projet = ref([])
+  const projet = ref({})
   const projetsParId = ref([])
+
+  const router = useRouter()
 
   // ******** les guetters ********
 
@@ -19,12 +23,17 @@ export const useProjectStore = defineStore('project', () => {
   // afficher tous les projets
   async function getProjects() {
 
+    projects.value = []
+
     const q = query(collection(db, "projects"))
+
+
     onSnapshot(q, (snapshot) => {
 
       snapshot.docChanges().forEach((change) => {
 
         if (change.type === "added") {
+
 
           projects.value.push({
             ...change.doc.data(),
@@ -33,7 +42,14 @@ export const useProjectStore = defineStore('project', () => {
 
         }
         if (change.type === "modified") {
+
           console.log("Modified city: ", change.doc.data())
+
+          projects.value.push({
+            ...change.doc.data(),
+            id: change.doc.id
+          })
+
         }
         if (change.type === "removed") {
           console.log("Removed city: ", change.doc.data())
@@ -65,11 +81,11 @@ export const useProjectStore = defineStore('project', () => {
   }
 
 
-  // edit project
-  async function editProject(id) {
+  // trouver projet par id
+  async function findProjectByProjectId(id) {
 
-    projet.value = []
-    
+    projet.value = {}
+
     console.log('je suis dans editProject :', id)
     
     console.log('le state projet', projet.value)
@@ -78,15 +94,49 @@ export const useProjectStore = defineStore('project', () => {
     const querySnapshot = await getDocs(q)
     querySnapshot.forEach((doc) => {
       console.log(doc.id, " => ", doc.data())
-      projet.value.push({
-        ...doc.data(),
-      })
+      projet.value = doc.data()
     })
     console.log('dans edit project store ', projet.value)
 
   }
-  
+
+  // edit project
+  async function editProject() {
+    console.log('------- dans edit --------')
+    console.log('projet', projet.value)
+
+    const data = {
+      personUsername: projet.value.personUsername,
+      title: projet.value.title,
+      content: projet.value.content,
+      due: projet.value.due,
+      status: projet.value.status
+    } 
+
+    console.log(' ma super data : ', data)
+
+    const docRef = doc(db, "projects", projet.value.projectId)
+
+    await updateDoc(docRef, data)
+    .then(async docRef => {
+      console.log("Update successful!")
+      await router.push({ name: 'dashboard'})
+    })
+    .catch(error => {
+      console.log(error)
+    })
+
+  }
 
 
-  return { projects, getProjects, getProjectById, editProject, projet, projetsParId }
+  return { 
+    projects, 
+    getProjects, 
+    getProjectById, 
+    findProjectByProjectId, 
+    projet, 
+    projetsParId, 
+    editProject 
+  }
+
 })
