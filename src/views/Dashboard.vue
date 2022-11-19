@@ -2,7 +2,7 @@
   
   <div>
 
-    <h1 class="text-h3 text-brown-darken-2 text-center"> Dashboard</h1>
+    <h1 class="text-h3 text-brown-darken-2 text-center mt-10"> Dashboard</h1>
 
     <!-- message de succes et d'echec pour firebase - ajout project -->
     <div>

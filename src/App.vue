@@ -17,6 +17,7 @@
           <v-list-item
             prepend-avatar="https://randomuser.me/api/portraits/men/85.jpg"
             title="John Leider"
+            v-if="authStore.user.isAuthenticated"
             nav
           >
             <template v-slot:append>
