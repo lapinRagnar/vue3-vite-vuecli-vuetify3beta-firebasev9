@@ -33,11 +33,23 @@
 
           <v-list density="compact" nav>
             <v-list-item :to="{name: 'dashboard'}" prepend-icon="mdi-home-city" title="Dashboard" value="dashboard"></v-list-item>
-            <v-list-item :to="{name: 'project'}" prepend-icon="mdi-calendar-range" title="Project" value="project"></v-list-item>
-            <v-list-item :to="{name: 'team'}" prepend-icon="mdi-microsoft-teams" title="Team" value="team"></v-list-item>
+            <!-- <v-list-item :to="{name: 'project'}" prepend-icon="mdi-calendar-range" title="Project" value="project"></v-list-item>
+            <v-list-item :to="{name: 'team'}" prepend-icon="mdi-microsoft-teams" title="Team" value="team"></v-list-item> -->
+            
             <v-list-item :to="{name: 'about'}" prepend-icon="mdi-information-variant" title="About" value="about"></v-list-item>
-            <v-list-item prepend-icon="mdi-account" title="My Account" value="account"></v-list-item>
-            <v-list-item prepend-icon="mdi-account-group-outline" title="Users" value="users"></v-list-item>
+            
+            <v-list-item
+              prepend-icon="mdi-account"
+              title="My Account"
+              value="account"
+              v-if="!authStore.user.isAuthenticated"
+            ></v-list-item>
+            
+            <!-- <v-list-item
+              prepend-icon="mdi-account-group-outline"
+              title="Users"
+              value="users"
+            ></v-list-item> -->
           </v-list>
         </v-navigation-drawer>
         
@@ -72,7 +84,7 @@ onMounted(() => {
   authStore.initialisationUser()
 }) 
 
-
+console.log('dans app - est ce que user est connecté', authStore.user)
 
 </script>
 

@@ -111,11 +111,12 @@ export const useAuthStore = defineStore('auth', () => {
         user.id = utilisateur.uid
         user.isAuthenticated = true
         user.email = utilisateur.email
-        // ...
+        console.log(`----- l'user ${user.id} - ${user.email} - isAuthenticated = ${user.isAuthenticated}`)
       } else {
         // User is signed out
         // ...
         console.log('user deconnecté')
+        console.log(`----- l'user ${user.id} - ${user.email} - isAuthenticated = ${user.isAuthenticated}`)
         user.email = ''
         user.password = ''
         user.id = ''
