@@ -10,21 +10,21 @@
         <v-icon>mdi-home</v-icon>
       </v-btn>
 
-      <v-btn :to="{name: 'project'}"> 
+      <!-- <v-btn :to="{name: 'project'}"> 
         <v-icon>mdi-calendar-range</v-icon>
       </v-btn>
 
       <v-btn :to="{name: 'team'}">
         <v-icon>mdi-microsoft-teams</v-icon>
-      </v-btn>
+      </v-btn> -->
 
       <v-btn to="/about">
         <v-icon>mdi-information-variant</v-icon>
       </v-btn>
 
-      <!-- dropdown -->
+      <!-- dropdown menu -->
 
-      <v-menu>
+      <!-- <v-menu>
 
         <template v-slot:activator="{ props }" >
           <v-btn
@@ -52,7 +52,7 @@
             </v-list-item-title>
           </v-list-item>
         </v-list>
-      </v-menu>
+      </v-menu> -->
 
       <!-- lien login et signup -->
 
@@ -112,11 +112,11 @@
     next()
   })
   
-  const links = ref([
-    { icon: 'mdi-home', text: 'Dashboard', route: '/'},
-    { icon: 'mdi-calendar-range', text: 'My Projects', route: '/project'},
-    { icon: 'mdi-microsoft-teams', text: 'Team', route: '/team'},
-  ])
+  // const links = ref([
+  //   { icon: 'mdi-home', text: 'Dashboard', route: '/'},
+  //   // { icon: 'mdi-calendar-range', text: 'My Projects', route: '/project'},
+  //   // { icon: 'mdi-microsoft-teams', text: 'Team', route: '/team'},
+  // ])
 
   const handleToggleIconMenu = () => {
     console.log('ca marche, valeur =', toggleIconMenu.value)
