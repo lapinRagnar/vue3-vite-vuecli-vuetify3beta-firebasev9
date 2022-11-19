@@ -33,3 +33,7 @@ npm run build
 ##### vuetify
 https://next.vuetifyjs.com/
 
+
+### site de deploiement
+https://vercel.com/
+

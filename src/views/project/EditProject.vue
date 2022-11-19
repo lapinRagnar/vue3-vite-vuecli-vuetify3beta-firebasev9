@@ -92,13 +92,16 @@
  
 
   const projectStore = useProjectStore()
-  const { projet, } = storeToRefs(projectStore)
+  const { projet, projects } = storeToRefs(projectStore)
   
+
 
   const router = useRoute()
 
   const form = ref(null)
   const isValid = ref(true)
+
+  const emit = defineEmits(['projectAdded'])
 
   
   const id = router.params.id
@@ -119,11 +122,10 @@
 
     if (valid) {
       projectStore.editProject()
+      emit('projectAdded')
+      
     }
   }
 
 </script>
 
-<style lang="scss" scoped>
-
-</style>

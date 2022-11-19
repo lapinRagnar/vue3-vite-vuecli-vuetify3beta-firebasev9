@@ -104,23 +104,6 @@
     console.log('utilisateur', authStore.user)
 
     if (valid) {
-      
-
-
-      // crud create projets
-      
-      // const dbRef = collection(db, "projects")      
-
-      // await addDoc(dbRef, project)
-      // .then(docRef => {
-      //   console.log('document bien enregistré', docRef)
-      //   loading.value = false
-      //   dialog.value = false
-      //   emit('projectAdded')
-      // })
-      // .catch(error => {
-      //   console.log(error);
-      // })
 
       const newProjectRef = doc(collection(db, "projects"))
 

@@ -23,12 +23,15 @@ export const useProjectStore = defineStore('project', () => {
   // afficher tous les projets
   async function getProjects() {
 
+    
     projects.value = []
 
     const q = query(collection(db, "projects"))
 
 
     onSnapshot(q, (snapshot) => {
+      
+      
 
       snapshot.docChanges().forEach((change) => {
 
@@ -56,7 +59,6 @@ export const useProjectStore = defineStore('project', () => {
         }
       })
     })
-    console.log('tous les projets dans le store', projects.value)
   }
 
   getProjects()
@@ -102,8 +104,10 @@ export const useProjectStore = defineStore('project', () => {
 
   // edit project
   async function editProject() {
+
+    // projects.value = []
+
     console.log('------- dans edit --------')
-    console.log('projet', projet.value)
 
     const data = {
       personUsername: projet.value.personUsername,
@@ -113,7 +117,6 @@ export const useProjectStore = defineStore('project', () => {
       status: projet.value.status
     } 
 
-    console.log(' ma super data : ', data)
 
     const docRef = doc(db, "projects", projet.value.projectId)
 
