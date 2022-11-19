@@ -30,6 +30,7 @@
                   :rules="[v => !!v || 'Email is required']"
                 ></v-text-field>
 
+
                 <v-text-field
                   id="password"
                   prepend-icon="mdi-lock"
@@ -52,6 +53,12 @@
                   >Login</v-btn>
                   
                 </v-card-actions>
+
+                <v-alert
+                  v-if="authStore.user.errorMSG"
+                  color="red-lighten-5"
+                  class="mb-10 text-red"
+                >{{ authStore.user.errorMSG }}</v-alert>
 
             </v-form>
 
@@ -110,7 +117,7 @@
   }
 
 
-
+  console.log('dans login vue', authStore.user.errorMSG )
 
 </script>
 

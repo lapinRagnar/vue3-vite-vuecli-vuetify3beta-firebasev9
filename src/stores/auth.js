@@ -14,6 +14,7 @@ export const useAuthStore = defineStore('auth', () => {
     email: '',
     password: '',
     error: null,
+    errorMSG: '',
     messageSucces: 'Merci, Bien enregistré!',
     loading: false,
     id: '',
@@ -83,6 +84,13 @@ export const useAuthStore = defineStore('auth', () => {
     .catch((error) => {
       const errorCode = error.code
       const errorMessage = error.message
+      
+      user.errorMSG = 'Login ou Password incorrect'
+ 
+
+
+      
+
       console.log('errorCode, errorMessage', errorCode, errorMessage)
     })
 
