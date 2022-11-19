@@ -6,7 +6,7 @@
 
     <v-row class="conteneur" >
 
-      <v-col xl="6" lg="6" md="6" class="text-center ">
+      <v-col cols="8" xl="6" lg="6" md="6" class="text-center ">
         
         <v-card class="ma-10 pa-5">
 
@@ -56,8 +56,13 @@
 
                 <v-alert
                   v-if="authStore.user.errorMSG"
-                  color="red-lighten-5"
-                  class="mb-10 text-red"
+                  type="error"
+                  variant="tonal"
+                  closable
+                  prominent
+                  border="bottom"
+                  border-color="warning"
+  
                 >{{ authStore.user.errorMSG }}</v-alert>
 
             </v-form>
@@ -96,6 +101,7 @@
   const authStore = useAuthStore()
   const { user,  } = storeToRefs(authStore)
   
+  
   const form = ref(null)
   const isValid = ref(true)
 
@@ -117,7 +123,6 @@
   }
 
 
-  console.log('dans login vue', authStore.user.errorMSG )
 
 </script>
 

@@ -1,6 +1,6 @@
 <template>
   <div class="about">
-    <h1 class="text-h3 text-brown-darken-2 text-center">This is an about page</h1>
+    <h1 class="text-h3 text-brown-darken-2 text-center mt-10">This is an about page</h1>
 
     <v-container class="my-5">
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores expedita facilis commodi atque totam, debitis nobis! Doloremque, ducimus totam fugiat soluta omnis maxime cumque unde exercitationem error tempore animi sunt?</p>
